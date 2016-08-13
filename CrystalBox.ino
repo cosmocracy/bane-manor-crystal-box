@@ -115,8 +115,8 @@ void reconnect() {
       Serial.println("connected");
       // Once connected, publish an announcement...
       client.publish("ambient/output", "Connected");
-      // ... and resubscribe
-      client.subscribe("ambient/input");
+      // ... and resubscribe (with QOS=1 so we won't miss messages)
+      client.subscribe("ambient/input", 1);
       // Set to blue
       colorWipe(strip.Color(0, 0, 50), 1);
     } else {
